@@ -18,3 +18,7 @@
  - Host an App on HTTPs
  - Tree Shaking - removes unused code for us.
  - Different dev and prod bundles.
+
+# Babel
+ - Babel is a Javascript Complier.
+ - Converts JSX to React Element.
