@@ -1,17 +1,35 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
-import resList from "../utils/mockData";
+import Shimmer from "./Shimmer";
 
 const Body = () => {
   // Local State Variable
-  const [listOfRestaurants, setListOfRestaurants] = useState(resList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
   useEffect(() => {
     // code here will run after every render
     console.log("after every render", listOfRestaurants);
-  });
 
-  return (
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const data = await fetch(
+      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.37240&lng=78.43780&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+    );
+
+    const json = await data.json();
+
+    setListOfRestaurants(
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    console.log(json);
+  };
+
+  // Conditional Rendering.
+  return listOfRestaurants.length == 0 ? (
+    <Shimmer />
+  ) : (
     <div className="body">
       <div className="filter">
         <button
