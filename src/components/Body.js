@@ -1,6 +1,7 @@
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Outlet } from "react-router-dom";
 
 const Body = () => {
   // Local State Variable

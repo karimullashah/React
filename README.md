@@ -64,3 +64,11 @@
 - - Adress
 - - Contact
 - \*/
+
+
+
+
+# 2 types Routing in web apps
+
+1. Client Side Routing
+2. Server Side Routing
