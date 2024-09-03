@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Outlet } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   // Local State Variable
@@ -10,7 +11,8 @@ const Body = () => {
     []
   );
   const [searchText, setSearchText] = useState("");
-
+  
+  
   useEffect(() => {
     // code here will run after every render
     console.log("after every render", listOfRestaurants);
@@ -34,6 +36,12 @@ const Body = () => {
 
     console.log(json);
   };
+
+  const onlineStatus = useOnlineStatus();
+
+  if(onlineStatus == false){
+    return <h1>Looks like you're offline!! Please check your internet connection</h1>
+  }
 
   // Conditional Rendering.
   return listOfRestaurants.length == 0 ? (
