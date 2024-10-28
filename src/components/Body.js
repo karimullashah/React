@@ -11,8 +11,7 @@ const Body = () => {
     []
   );
   const [searchText, setSearchText] = useState("");
-  
-  
+
   useEffect(() => {
     // code here will run after every render
     console.log("after every render", listOfRestaurants);
@@ -39,8 +38,10 @@ const Body = () => {
 
   const onlineStatus = useOnlineStatus();
 
-  if(onlineStatus == false){
-    return <h1>Looks like you're offline!! Please check your internet connection</h1>
+  if (onlineStatus == false) {
+    return (
+      <h1>Looks like you're offline!! Please check your internet connection</h1>
+    );
   }
 
   // Conditional Rendering.
@@ -48,17 +49,18 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex items-center">
+        <div className="m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black"
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
             value={searchText}
           />
           <button
+            className="px-4 py-1 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               //Filter the Restaurant cards and update the UI.
               setFilteredListOfRestaurants(
@@ -73,20 +75,22 @@ const Body = () => {
             search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            // Filter logic here
-            setFilteredListOfRestaurants(
-              listOfRestaurants.filter((res) => res.info.avgRating > 4)
-            );
-            console.log(filteredListOfRestaurants);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+        <div className="m-4 p-4">
+          <button
+            className="px-4 py-1 bg-gray-100 rounded-lg"
+            onClick={() => {
+              // Filter logic here
+              setFilteredListOfRestaurants(
+                listOfRestaurants.filter((res) => res.info.avgRating > 4)
+              );
+              console.log(filteredListOfRestaurants);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
+        </div>
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap">
         {/* RestaurantCard   */}
         {/* dont use index as key, as it is anti pattern */}
         {filteredListOfRestaurants.map((restaurant) => (
